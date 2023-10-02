@@ -1,11 +1,11 @@
 import type { Post } from "@prisma/client";
-import { usePost } from "../lib/hooks";
 import { useEffect, useState } from "react";
+import { useMutatePost } from "../lib/hooks";
 
 type Props = { post: Post };
 
 export const PostItem = ({ post }: Props) => {
-  const { update, del } = usePost();
+  const { updatePost, deletePost } = useMutatePost();
   const [email, setEmail] = useState<string>("");
 
   useEffect(() => {
@@ -16,14 +16,14 @@ export const PostItem = ({ post }: Props) => {
   }, [post]);
 
   async function onTogglePublished(post: Post) {
-    await update({
+    await updatePost({
       where: { id: post.id },
       data: { published: !post.published },
     });
   }
 
   async function onDelete(post: Post) {
-    await del({ where: { id: post.id } });
+    await deletePost({ where: { id: post.id } });
   }
 
   return (

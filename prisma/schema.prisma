@@ -4,12 +4,13 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 datasource db {
-    provider="sqlite"
-    url=env("DATABASE_URL")
+    provider = "sqlite"
+    url = env("DATABASE_URL")
 }
 
 generator client {
     provider = "prisma-client-js"
+    previewFeatures = ["extendedWhereUnique","fieldReference"]
 }
 
 /// @@allow('all', auth() != null && auth().id == authorId)
@@ -21,13 +22,10 @@ model Post {
     title String
     published Boolean @default(false)
     authorId String
-    zenstack_guard Boolean @default(true)
-    zenstack_transaction String?
-    @@index([zenstack_transaction])
 }
 
 model User {
     id String @id()
-    zenstack_guard Boolean @default(true)
+
     @@ignore()
 }

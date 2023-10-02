@@ -9,14 +9,14 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
-    "update": "npm i --save-exact @zenstackhq/runtime@latest @zenstackhq/next@latest @zenstackhq/react@latest && npm i -D --save-exact zenstack@latest"
+    "up": "npm i --save-exact @zenstackhq/runtime@latest @zenstackhq/server@latest @zenstackhq/swr@latest && npm i -D --save-exact zenstack@latest"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.16.1",
     "@prisma/client": "^4.5.0",
-    "@zenstackhq/next": "1.0.0-alpha.101",
-    "@zenstackhq/react": "1.0.0-alpha.101",
-    "@zenstackhq/runtime": "1.0.0-alpha.101",
+    "@zenstackhq/runtime": "1.0.1",
+    "@zenstackhq/server": "1.0.1",
+    "@zenstackhq/swr": "1.0.1",
     "next": "13.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -38,7 +38,7 @@
     "prisma": "^4.5.0",
     "tailwindcss": "^3.2.0",
     "typescript": "^4.8.4",
-    "zenstack": "1.0.0-alpha.101"
+    "zenstack": "1.0.1"
   },
   "ct3aMetadata": {
     "initVersion": "6.11.3"

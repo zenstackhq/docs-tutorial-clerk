@@ -2,7 +2,7 @@ import { useAuth, useClerk, useUser } from "@clerk/nextjs";
 import { type NextPage } from "next";
 import Link from "next/link";
 import { PostItem } from "../components/PostItem";
-import { usePost } from "../lib/hooks";
+import { useFindManyPost, useMutatePost } from "../lib/hooks";
 
 type AuthUser = { id: string; email?: string | null };
 
@@ -40,10 +40,10 @@ const Posts = ({ user }: { user: AuthUser }) => {
   const { userId } = useAuth();
 
   // Post crud hooks
-  const { findMany, create } = usePost();
+  const { createPost } = useMutatePost();
 
   // list all posts that're visible to the current user
-  const { data: posts } = findMany(
+  const { data: posts } = useFindManyPost(
     {
       orderBy: { createdAt: "desc" },
     },
@@ -58,7 +58,7 @@ const Posts = ({ user }: { user: AuthUser }) => {
   async function onCreatePost() {
     const title = prompt("Enter post title");
     if (title) {
-      await create({ data: { title, authorId: user.id } });
+      await createPost({ data: { title, authorId: user.id } });
     }
   }
 
