@@ -16,12 +16,12 @@ plugin hooks {
 }
 
 model Post {
-  id String @id @default(cuid())
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  title String
-  published Boolean @default(false)
-  authorId String
+  title     String
+  published Boolean  @default(false)
+  authorId  String
 
   // author has full access
   @@allow('all', auth() != null && auth().id == authorId)

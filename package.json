@@ -12,12 +12,12 @@
     "up": "npm i --save-exact @zenstackhq/runtime@latest @zenstackhq/server@latest @zenstackhq/swr@latest && npm i -D --save-exact zenstack@latest"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.16.1",
-    "@prisma/client": "^4.5.0",
-    "@zenstackhq/runtime": "1.1.0",
-    "@zenstackhq/server": "1.1.0",
-    "@zenstackhq/swr": "1.1.0",
-    "next": "13.0.2",
+    "@clerk/nextjs": "^5.0.2",
+    "@prisma/client": "5.12.0",
+    "@zenstackhq/runtime": "^1.12.4",
+    "@zenstackhq/server": "^1.12.4",
+    "@zenstackhq/swr": "^1.12.4",
+    "next": "^14.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "swr": "^2.1.3",
@@ -35,10 +35,10 @@
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
-    "prisma": "^4.5.0",
+    "prisma": "5.12.0",
     "tailwindcss": "^3.2.0",
     "typescript": "^4.8.4",
-    "zenstack": "1.1.0"
+    "zenstack": "^1.12.4"
   },
   "ct3aMetadata": {
     "initVersion": "6.11.3"
