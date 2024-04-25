@@ -1,11 +1,12 @@
 import type { Post } from "@prisma/client";
 import { useEffect, useState } from "react";
-import { useMutatePost } from "../lib/hooks";
+import { useDeletePost, useUpdatePost } from "../lib/hooks";
 
 type Props = { post: Post };
 
 export const PostItem = ({ post }: Props) => {
-  const { updatePost, deletePost } = useMutatePost();
+  const { trigger: updatePost } = useUpdatePost();
+  const { trigger: deletePost } = useDeletePost();
   const [email, setEmail] = useState<string>("");
 
   useEffect(() => {
