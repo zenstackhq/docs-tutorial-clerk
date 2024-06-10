@@ -1,6 +1,7 @@
 /* eslint-disable */
 import type { Prisma } from "@prisma/client";
 import { type GetNextArgs, type QueryOptions, type InfiniteQueryOptions, type MutationOptions, type PickEnumerable } from '@zenstackhq/swr/runtime';
+import type { PolicyCrudKind } from '@zenstackhq/runtime'
 import metadata from './__model_meta';
 import * as request from '@zenstackhq/swr/runtime';
 
@@ -10,6 +11,16 @@ export function useCreatePost(options?: MutationOptions<Prisma.PostGetPayload<Pr
         ...mutation,
         trigger: <T extends Prisma.PostCreateArgs>(args: Prisma.SelectSubset<T, Prisma.PostCreateArgs>) => {
             return mutation.trigger(args, options as any) as Promise<Prisma.PostGetPayload<T> | undefined>;
+        }
+    };
+}
+
+export function useCreateManyPost(options?: MutationOptions<Prisma.BatchPayload, unknown, Prisma.PostCreateManyArgs>) {
+    const mutation = request.useModelMutation('Post', 'POST', 'createMany', metadata, options, false);
+    return {
+        ...mutation,
+        trigger: <T extends Prisma.PostCreateManyArgs>(args: Prisma.SelectSubset<T, Prisma.PostCreateManyArgs>) => {
+            return mutation.trigger(args, options as any) as Promise<Prisma.BatchPayload>;
         }
     };
 }
@@ -140,4 +151,8 @@ export function useGroupByPost<T extends Prisma.PostGroupByArgs, HasSelectOrTake
 
 export function useCountPost<T extends Prisma.PostCountArgs>(args?: Prisma.Subset<T, Prisma.PostCountArgs>, options?: QueryOptions<T extends { select: any; } ? T['select'] extends true ? number : Prisma.GetScalarType<T['select'], Prisma.PostCountAggregateOutputType> : number>) {
     return request.useModelQuery('Post', 'count', args, options);
+}
+
+export function useCheckPost(args: { operation: PolicyCrudKind; where?: { id?: string; title?: string; published?: boolean; authorId?: string }; }, options?: QueryOptions<boolean>) {
+    return request.useModelQuery('Post', 'check', args, options);
 }
