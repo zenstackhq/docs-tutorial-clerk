@@ -1,6 +1,9 @@
+"use client";
+
 import { useAuth, useClerk, useUser } from "@clerk/nextjs";
 import { type NextPage } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { PostItem } from "../components/PostItem";
 import { useCreatePost, useFindManyPost } from "../lib/hooks";
 
@@ -10,7 +13,7 @@ const Welcome = ({ user }: { user: AuthUser }) => {
   const { signOut } = useClerk();
 
   async function onSignout() {
-    signOut();
+    await signOut({ redirectUrl: "/signin" });
   }
   return (
     <div className="flex gap-4">
@@ -83,9 +86,15 @@ const Posts = ({ user }: { user: AuthUser }) => {
 };
 
 const Home: NextPage = () => {
-  const { user: clerkUser } = useUser();
+  const { user: clerkUser, isLoaded, isSignedIn } = useUser();
 
-  if (!clerkUser) return <p>Loading ...</p>;
+  if (!isLoaded) {
+    return <p>Loading ...</p>;
+  }
+
+  if (!isSignedIn) {
+    redirect("/signin");
+  }
 
   const user = {
     id: clerkUser?.id,
