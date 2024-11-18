@@ -1,4 +1,4 @@
-import { currentUser } from "@clerk/nextjs/server";
+import { clerkClient } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -7,7 +7,7 @@ export async function GET(
 ) {
   const id = params.id;
   if (id) {
-    const user = await currentUser();
+    const user = await (await clerkClient()).users.getUser(id);
     if (user) {
       return NextResponse.json({
         id,
