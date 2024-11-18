@@ -11,8 +11,13 @@ datasource db {
 }
 
 plugin hooks {
-  provider = '@zenstackhq/swr'
+  provider = '@zenstackhq/tanstack-query'
+  target = 'react'
   output = "./src/lib/hooks"
+}
+
+type User {
+  id String @id
 }
 
 model Post {
@@ -29,9 +34,3 @@ model Post {
   // logged-in users can view published posts
   @@allow('read', auth() != null && published)
 }
-
-model User {
-  id String @id
-  @@ignore
-}
-

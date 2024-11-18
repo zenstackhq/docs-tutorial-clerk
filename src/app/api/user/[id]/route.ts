@@ -1,4 +1,5 @@
-import { clerkClient } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 export async function GET(
   _request: Request,
@@ -6,16 +7,16 @@ export async function GET(
 ) {
   const id = params.id;
   if (id) {
-    const user = await clerkClient.users.getUser(id);
+    const user = await currentUser();
     if (user) {
-      return Response.json({
+      return NextResponse.json({
         id,
         email: user.emailAddresses?.[0]?.emailAddress,
       });
     } else {
-      return Response.json({ error: "User not found" }, { status: 404 });
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
   } else {
-    return Response.json({ error: "Missing id" }, { status: 400 });
+    return NextResponse.json({ error: "Missing id" }, { status: 400 });
   }
 }

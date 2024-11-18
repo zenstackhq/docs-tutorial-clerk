@@ -4,10 +4,10 @@ import { NextRequestHandler } from "@zenstackhq/server/next";
 import { prisma } from "~/server/db/client";
 
 async function getPrisma() {
-  const authObject = auth();
+  const authObject = await auth();
   // create a wrapper of Prisma client that enforces access policy
   return enhance(prisma, {
-    user: authObject ? { id: authObject.userId } : undefined,
+    user: authObject.userId ? { id: authObject.userId } : undefined,
   });
 }
 
