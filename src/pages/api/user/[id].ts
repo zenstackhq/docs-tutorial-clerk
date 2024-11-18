@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   const id = req.query.id as string | undefined;
   if (id) {
-    const user = await clerkClient.users.getUser(id);
+    const user = await (await clerkClient()).users.getUser(id);
     if (user) {
       return res
         .status(200)

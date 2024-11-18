@@ -40,7 +40,7 @@ const Posts = ({ user }: { user: AuthUser }) => {
   const { userId } = useAuth();
 
   // Post crud hooks
-  const { trigger: createPost } = useCreatePost();
+  const { mutateAsync: createPost } = useCreatePost();
 
   // list all posts that're visible to the current user
   const { data: posts } = useFindManyPost(
@@ -48,7 +48,7 @@ const Posts = ({ user }: { user: AuthUser }) => {
       orderBy: { createdAt: "desc" },
     },
     // fetch only when user's logged in
-    { disabled: !userId }
+    { enabled: !!userId }
   );
 
   if (!userId) {

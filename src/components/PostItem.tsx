@@ -5,8 +5,8 @@ import { useDeletePost, useUpdatePost } from "../lib/hooks";
 type Props = { post: Post };
 
 export const PostItem = ({ post }: Props) => {
-  const { trigger: updatePost } = useUpdatePost();
-  const { trigger: deletePost } = useDeletePost();
+  const { mutateAsync: updatePost } = useUpdatePost();
+  const { mutateAsync: deletePost } = useDeletePost();
   const [email, setEmail] = useState<string>("");
 
   useEffect(() => {

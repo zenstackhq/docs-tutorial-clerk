@@ -1,12 +1,17 @@
 import { type AppType } from "next/app";
 
-import "../styles/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import React from "react";
+import "../styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps: { ...pageProps } }) => {
+  const [queryClient] = React.useState(() => new QueryClient());
   return (
     <ClerkProvider {...pageProps}>
-      <Component {...pageProps} />
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
     </ClerkProvider>
   );
 };

@@ -5,10 +5,12 @@ import type { NextApiRequest } from "next";
 import { prisma } from "../../../server/db/client";
 
 async function getPrisma(req: NextApiRequest) {
-  const auth = getAuth(req);
+  const authObj = getAuth(req);
   // create a wrapper of Prisma client that enforces access policy,
   // data validation, and @password, @omit behaviors
-  return enhance(prisma, { user: auth ? { id: auth.userId } : undefined });
+  return enhance(prisma, {
+    user: authObj.userId ? { id: authObj.userId } : undefined,
+  });
 }
 
 export default NextRequestHandler({ getPrisma });
